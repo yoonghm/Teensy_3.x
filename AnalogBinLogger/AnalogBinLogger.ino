@@ -1,5 +1,9 @@
 /*
  * Simple data logger.
+ *
+ * Need library from https://github.com/greiman/SdFat-beta/tree/master/SdFat
+ * See https://www.arduino.cc/en/Guide/Libraries on how to install addtional 
+ * library into your Arduino IDE software
  */
 #include <SPI.h>
 #include "SdFat.h"
