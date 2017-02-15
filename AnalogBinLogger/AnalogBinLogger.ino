@@ -17,7 +17,7 @@ const uint32_t SAMPLE_INTERVAL_MS = 1000;
 #define FILE_BASE_NAME "Data"
 //------------------------------------------------------------------------------
 // File system object.
-SdFatSdio sd;
+SdFatSdio sd; // Teensy 3.5 and 3.6 use SDIO to interface onboard uSD
 
 // Log file.
 SdFile file;
@@ -79,8 +79,6 @@ void setup() {
     SysCall::yield();
   }
   
-  // Initialize at the highest speed supported by the board that is
-  // not over 50 MHz. Try a lower speed if SPI errors occur.
   if (!sd.begin()) {
     sd.initErrorHalt();
   }
