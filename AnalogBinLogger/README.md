@@ -1,9 +1,9 @@
-This example is only for Teensy 3.5 and 3.6
+This example, for Teensy 3.5 & 3.6, is modified from AnalogBinLogger from https://github.com/greiman/SdFat-beta/tree/master/SdFat
 
-You need to download SdFat from https://github.com/greiman/SdFat-beta/tree/master/SdFat
+# Requirements
+* microSD card formatted in FAT or FAT33, in the on-board microSD card holder
+* SdFat library from https://github.com/greiman/SdFat-beta/tree/master/SdFat
 
-This example is modified from the AnalogBigLogger from the SdFat library.
-
-Teensy 3.5 and 3.6 make use SDIO instead of SPI interface the on-board microSD holder.
+Teensy 3.5 & 3.6 use SDIO peripheral to interface micorSD via the on-board microSD holder.
 
 Chip select is connected to pin 10.
