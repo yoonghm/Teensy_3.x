@@ -1,7 +1,10 @@
 #include <TimeLib.h>
 
-#define DATETIMELEN  32
+const int DATETIMELEN = 32;
 char DateTime[DATETIMELEN];
+
+const int LEDPIN = 13;
+int status = 0;
 
 // weekday() returns integer: 1 = Sunday
 const char *WeekdayName[] = {
@@ -32,23 +35,24 @@ const char *MonthName[] = {
   "Dec"          // 12
 };
 
-char datetime[32];
-
 void setup() {
-  // Set system time to 23:59:50 31-12-1999
-  setTime(23, 59, 50, 31, 12, 1999); 
+  Serial.begin(9600);
 
-  if (timeStatus() != timeSet) {
-    Serial.println("Time's clock is not set or not synchroized");
-  }
+  pinMode(LEDPIN, OUTPUT);
+
+  // Set system time to 23:59:50 31-12-1999
+  setTime(23, 59, 50, 31, 12, 1999);
 }
 
 void loop() {
+  status = !status;
+  digitalWrite(LEDPIN, status);
+
   snprintf(DateTime, DATETIMELEN,
            "%02d-%s-%d %s %02d:%02d:%02d",
            day(), MonthName[month()], year(), WeekdayName[weekday()],
            hour(), minute(), second()
           );
-  Serial.println(datetime);
+  Serial.println(DateTime);
   delay(1000);
 }
