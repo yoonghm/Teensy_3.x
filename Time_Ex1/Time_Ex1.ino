@@ -1,5 +1,8 @@
 #include <TimeLib.h>
 
+#define DATETIMELEN  32
+char DateTime[DATETIMELEN];
+
 // weekday() returns integer: 1 = Sunday
 const char *WeekdayName[] = {
   "      "   ,   // 0
@@ -34,14 +37,17 @@ char datetime[32];
 void setup() {
   // Set system time to 23:59:50 31-12-1999
   setTime(23, 59, 50, 31, 12, 1999); 
+
+  if (timeStatus() != timeSet) {
+    Serial.println("Time's clock is not set or not synchroized");
+  }
 }
 
 void loop() {
-  snprintf(datetime, 32, 
-           "%02d:%02d:%02d %02d-%s-%d %s",
-           hour(), minute(), second(),
-           day(), MonthName[month()],
-           year(), WeekdayName[weekday()]
+  snprintf(DateTime, DATETIMELEN,
+           "%02d-%s-%d %s %02d:%02d:%02d",
+           day(), MonthName[month()], year(), WeekdayName[weekday()],
+           hour(), minute(), second()
           );
   Serial.println(datetime);
   delay(1000);
