@@ -22,6 +22,7 @@ void trigger() {
   digitalWrite(ledPin, status);
   status = !status;
   for (int i = 0; i < 10000; i++)
+     ;
   NVIC_ENABLE_IRQ(IRQ_PORTE);
 }
 
