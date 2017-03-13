@@ -1,3 +1,5 @@
+// http://tiny.cc/rgb123
+
 #include <math.h>
  
 #ifndef M_PI
@@ -7,6 +9,8 @@
 const int redPin   =  3;
 const int bluePin  =  4;
 const int greenPin =  5;
+
+float f = 0.0;
 
 int redPulse, bluePulse, greenPulse;
 
@@ -24,10 +28,10 @@ void setup() {
 
 void loop() {
   // Add 1.0 to ensure all values are positive
-  redPin   = sin( (f        ) * M_PI / 180.0) + 1.0;
-  bluePin  = sin( (f + 180.0) * M_PI / 180.0) + 1.0;
-  greenPin = sin( (f + 270.0) * M_PI / 180.0) + 1.0;
+  redPulse   = sin( (f        ) * M_PI / 180.0) + 1.0;
+  bluePulse  = sin( (f + 180.0) * M_PI / 180.0) + 1.0;
+  greenPulse = sin( (f + 270.0) * M_PI / 180.0) + 1.0;
   lit();
   f += 1.0;
-  wait(0.01);
+  delay(10);
 }
