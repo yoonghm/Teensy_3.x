@@ -3,7 +3,6 @@
 const int DATETIMELEN = 32;
 char DateTime[DATETIMELEN];
 
-const int LEDPIN = 13;
 int status = 0;
 
 // weekday() returns integer: 1 = Sunday
@@ -38,7 +37,7 @@ const char *MonthName[] = {
 void setup() {
   Serial.begin(9600);
 
-  pinMode(LEDPIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   // Set system time to 23:59:50 31-12-1999
   setTime(23, 59, 50, 31, 12, 1999);
@@ -46,7 +45,7 @@ void setup() {
 
 void loop() {
   status = !status;
-  digitalWrite(LEDPIN, status);
+  digitalWrite(LED_BUILTIN, status);
 
   snprintf(DateTime, DATETIMELEN,
            "%02d-%s-%d %s %02d:%02d:%02d",

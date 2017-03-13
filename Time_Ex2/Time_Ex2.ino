@@ -3,7 +3,6 @@
 const int DATETIMELEN = 32;
 char DateTime[DATETIMELEN];
 
-const int LEDPIN = 13;
 int status = 0;
 
 // weekday() returns integer: 1 = Sunday
@@ -42,7 +41,7 @@ time_t getTeensy3Clock() {
 void setup()  {
   Serial.begin(9600);
 
-  pinMode(LEDPIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   // Use Teensy3Clock - a global teensy3_clock_class object
   setSyncProvider(getTeensy3Clock);
@@ -54,7 +53,7 @@ void setup()  {
 
 void loop() {
   status = !status;
-  digitalWrite(LEDPIN, status);
+  digitalWrite(LED_BUILTIN, status);
 
   snprintf(DateTime, DATETIMELEN,
            "%02d-%s-%d %s %02d:%02d:%02d",
