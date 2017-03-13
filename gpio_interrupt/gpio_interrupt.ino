@@ -13,13 +13,13 @@ const int sw1      =  2;
 const int ledPin   = 13;
 
 float f = 0.0;
+volatile int status;
 
 int redPulse, bluePulse, greenPulse;
 
 void trigger() {
-  digitalWrite(ledPin, HIGH);
-  delay(1000);
-  digitalWrite(ledPin, LOW);
+  digitalWrite(ledPin, status);
+  status = !status;
 }
 
 void lit() {
@@ -34,6 +34,7 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(ledPin,   OUTPUT);  
   pinMode(sw1,      INPUT_PULLUP);
+  status = 1;
   attachInterrupt(sw1, trigger, FALLING);  
 }
 
