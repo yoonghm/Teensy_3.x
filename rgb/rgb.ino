@@ -28,9 +28,9 @@ void setup() {
 
 void loop() {
   // Add 1.0 to ensure all values are positive
-  redPulse   = sin( (f        ) * M_PI / 180.0) + 1.0;
-  bluePulse  = sin( (f + 180.0) * M_PI / 180.0) + 1.0;
-  greenPulse = sin( (f + 270.0) * M_PI / 180.0) + 1.0;
+  redPulse   = 127 * (sin( (f        ) * M_PI / 180.0) + 1.0);
+  bluePulse  = 127 * (sin( (f + 180.0) * M_PI / 180.0) + 1.0);
+  greenPulse = 127 * (sin( (f + 270.0) * M_PI / 180.0) + 1.0);
   lit();
   f += 1.0;
   delay(1);
