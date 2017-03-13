@@ -1,3 +1,5 @@
+// http://tiny.cc/rgb123
+
 #include <math.h>
  
 #ifndef M_PI
@@ -5,12 +7,20 @@
 #endif
 
 const int redPin   =  3;
-const int greenPin  =  4;
-const int bluePin =  5;
+const int greenPin =  4;
+const int bluePin  =  5;
+const int sw1      =  2;
+const int ledPin   = 13;
 
 float f = 0.0;
+volatile int status;
 
 int redPulse, bluePulse, greenPulse;
+
+void trigger() {
+  digitalWrite(ledPin, status);
+  status = !status;
+}
 
 void lit() {
   analogWrite(redPin,   redPulse);
@@ -22,6 +32,10 @@ void setup() {
   pinMode(redPin,   OUTPUT);
   pinMode(bluePin,  OUTPUT);
   pinMode(greenPin, OUTPUT);
+  pinMode(ledPin,   OUTPUT);  
+  pinMode(sw1,      INPUT_PULLUP);
+  status = 1;
+  attachInterrupt(sw1, trigger, FALLING);  
 }
 
 void loop() {
