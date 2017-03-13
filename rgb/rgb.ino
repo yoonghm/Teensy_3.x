@@ -33,5 +33,5 @@ void loop() {
   greenPulse = sin( (f + 270.0) * M_PI / 180.0) + 1.0;
   lit();
   f += 1.0;
-  delay(10);
+  delay(1);
 }
