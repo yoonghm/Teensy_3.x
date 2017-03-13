@@ -18,7 +18,7 @@ int redPulse, bluePulse, greenPulse;
 
 void trigger() {
   digitalWrite(ledPin, HIGH);
-  delay(10);
+  delay(1000);
   digitalWrite(ledPin, LOW);
 }
 
