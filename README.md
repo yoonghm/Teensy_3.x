@@ -3,7 +3,7 @@
 ---
 ## Datasheets and User Manuals
 
-** Teensy 3.6 ** [Datasheet](https://www.pjrc.com/teensy/K66P144M180SF5V2.pdf) [User Manual](https://www.pjrc.com/teensy/K66P144M180SF5RMV2.pdf)
+**Teensy 3.6** [Datasheet](https://www.pjrc.com/teensy/K66P144M180SF5V2.pdf) . [User Manual](https://www.pjrc.com/teensy/K66P144M180SF5RMV2.pdf)
 
 MK66FX1M0VMD18:
 - NXP Kinetis K66 180 Mhz Cortex-M4F MCU
@@ -12,7 +12,7 @@ MK66FX1M0VMD18:
 - 144-MAPBGA
 
 
-** Teensy 3.5 ** [Datasheet](https://www.pjrc.com/teensy/K64P144M120SF5.pdf) [User Manual](https://www.pjrc.com/teensy/K64P144M120SF5RM.pdf)
+**Teensy 3.5** [Datasheet](https://www.pjrc.com/teensy/K64P144M120SF5.pdf) . [User Manual](https://www.pjrc.com/teensy/K64P144M120SF5RM.pdf)
 
 MK64FX512VMD12:
 - NXP Kinetis K64 120 Mhz Cortex-M4F MCU
@@ -21,7 +21,7 @@ MK64FX512VMD12:
 - 144-MAPBGA
 
 
-** Teensy 3.1/3.2 ** [Datasheet](https://www.pjrc.com/teensy/K20P64M72SF1.pdf) [User Manual](https://www.pjrc.com/teensy/K20P64M72SF1RM.pdf)
+**Teensy 3.1/3.2** [Datasheet](https://www.pjrc.com/teensy/K20P64M72SF1.pdf) . [User Manual](https://www.pjrc.com/teensy/K20P64M72SF1RM.pdf)
 
 MK20DX256VLH7:
 - NXP Kinetis K20 72 Mhz Cortex-M4F MCU
