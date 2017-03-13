@@ -7,8 +7,8 @@
 #endif
 
 const int redPin   =  3;
-const int bluePin  =  4;
-const int greenPin =  5;
+const int greenPin  =  4;
+const int bluePin =  5;
 
 float f = 0.0;
 
