@@ -1,3 +1,5 @@
+// http://tiny.cc/rgb123
+
 #include <math.h>
  
 #ifndef M_PI
@@ -16,8 +18,11 @@ volatile int status;
 int redPulse, bluePulse, greenPulse;
 
 void trigger() {
+  NVIC_DISABLE_IRQ(IRQ_PORTE);
   digitalWrite(ledPin, status);
   status = !status;
+  for (int i = 0; i < 10000; i++)
+  NVIC_ENABLE_IRQ(IRQ_PORTE);
 }
 
 void lit() {
