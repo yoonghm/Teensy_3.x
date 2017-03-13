@@ -1,5 +1,3 @@
-// http://tiny.cc/rgb123
-
 #include <math.h>
  
 #ifndef M_PI
