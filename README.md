@@ -32,10 +32,21 @@ MK20DX256VLH7:
 ---
 ## Pinouts
 
-<img src="./Pinouts_3.6.jpg" width="350"/><img src="./Pinouts_3.5.jpg" width="350"/>
-<img src="./Pinouts_3.2.jpg" width="350"/><img src="./Pinouts_3.1.jpg" width="350"/>
-<img src="./Pinouts_3.6_back.jpg" width="350"/><img src="./Pinouts_3.5_back.jpg" width="350"/>
-<img src="./Pinouts_3.2_back.jpg" width="350"/><img src="./Pinouts_3.1_back.jpg" width="350"/>
+|**Teensy 3.6**                                  |**Teensy 3.5**                                 |
+|:----------------------------------------------:|:---------------------------------------------:|
+|<img src="./Pinouts_3.6.jpg" width="350"/>      |<img src="./Pinouts_3.5.jpg" width="350"/>     |
+
+|**Teensy 3.2**                                  |**Teensy 3.1**                                 |
+|:----------------------------------------------:|:---------------------------------------------:|
+|<img src="./Pinouts_3.2.jpg" width="350"/>      |<img src="./Pinouts_3.1.jpg" width="350"/>     |
+
+|**Teensy 3.6 Back**                             |**Teensy 3.5 Back**                            |
+|:----------------------------------------------:|:---------------------------------------------:|
+|<img src="./Pinouts_3.6_back.jpg" width="350"/> |<img src="./Pinouts_3.5_back.jpg" width="350"/>|
+
+|**Teensy 3.2 Back**                             |**Teensy 3.1 Back**                            |
+|:----------------------------------------------:|:---------------------------------------------:|
+|<img src="./Pinouts_3.2_back.jpg" width="350"/> |<img src="./Pinouts_3.1_back.jpg" width="350"/>|
 
 ---
 http://neodd.com/tytools/
