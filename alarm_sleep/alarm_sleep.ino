@@ -11,14 +11,11 @@ void flashLed(int del)
 #define RTC_IER_TAIE_MASK       0x4u
 #define RTC_SR_TAF_MASK         0x4u
 
-void rtcSetup(void)
+void rtcSetup(uint32_t nsec)
 {
   SIM_SCGC6 |= SIM_SCGC6_RTC;// enable RTC clock
   RTC_CR |= RTC_CR_OSCE;// enable RTC
-}
 
-void rtcSetAlarm(uint32_t nsec)
-{
   RTC_TAR = RTC_TSR + nsec;
   RTC_IER |= RTC_IER_TAIE_MASK;
 }
@@ -84,14 +81,12 @@ void setup() {
    // put your setup code here, to run once:
    flashLed(100);
    //
-   rtcSetup();
+   rtcSetup(5);
    llwuSetup();
 
-   rtcSetAlarm(5);
    goSleep();
 }
 
+// Never reach here
 void loop() {
-   // put your main code here, to run repeatedly:
-   //
 }
