@@ -4,59 +4,51 @@ void flashLed(int del)
   digitalWrite(LED_BUILTIN, HIGH);
   delay(del);
   digitalWrite(LED_BUILTIN, LOW);
-  pinMode(LED_BUILTIN, INPUT); // Conserve leakage current
+  pinMode(LED_BUILTIN, INPUT);
 }
 
 /******************* Seting Alarm **************************/
 #define RTC_IER_TAIE_MASK       0x4u
 #define RTC_SR_TAF_MASK         0x4u
 
-// Enable RTC module and 32.768 kHz oscillator
-void rtcSetup(void) {
-
-  // Enable software access and interrupts to RTC module
-  SIM_SCGC6 |= SIM_SCGC6_RTC;
-
-  // Enable 32.768 kHz oscillator
-  RTC_CR |= RTC_CR_OSCE;
+void rtcSetup(void)
+{
+  SIM_SCGC6 |= SIM_SCGC6_RTC;// enable RTC clock
+  RTC_CR |= RTC_CR_OSCE;// enable RTC
 }
 
-void rtcSetAlarm(uint32_t nsec) {
+void rtcSetAlarm(uint32_t nsec)
+{
   RTC_TAR = RTC_TSR + nsec;
   RTC_IER |= RTC_IER_TAIE_MASK;
 }
 
 /********************LLWU**********************************/
-#define LLWU_ME_WUME5_MASK       0x20u
-#if defined (HAS_KINETIS_LLWU_32CH)
-#define LLWU_MF5_WMUF5_MASK      0x20u
-#elif defined (HAS_KINETIS_LLWU_16CH)
-#define LLWU_F3_MWUF5_MASK       0x20u
-#endif
+#define WMUF5_MASK      0x20u
 
 static void llwuISR(void)
 {
-#if defined (HAS_KINETIS_LLWU_32CH)
-  LLWU_MF5 |= LLWU_MF5_WMUF5_MASK;
-#elif defined (HAS_KINETIS_LLWU_16CH)
-  LLWU_F3 |= LLWU_F3_MWUF5_MASK; // clear source in LLWU Flag register
+#if defined(HAS_KINETIS_LLWU_32CH)
+  LLWU_MF5 |= WMUF5_MASK;
+#elif defined(HAS_KINETIS_LLWU_16CH)
+  LLWU_F3 |= WMUF5_MASK; // clear source in LLWU Flag register
 #endif
   RTC_IER = 0;// clear RTC interrupts
 }
 
 void llwuSetup(void)
 {
-  attachInterruptVector(IRQ_LLWU, llwuISR);
-  NVIC_SET_PRIORITY(IRQ_LLWU, 2*16); // 3rd highest priority
+  attachInterruptVector( IRQ_LLWU, llwuISR );
+  NVIC_SET_PRIORITY( IRQ_LLWU, 2*16 );
 
-  NVIC_CLEAR_PENDING(IRQ_LLWU);
-  NVIC_ENABLE_IRQ(IRQ_LLWU);
+  NVIC_CLEAR_PENDING( IRQ_LLWU );
+  NVIC_ENABLE_IRQ( IRQ_LLWU );
 
-  LLWU_PE1 = 0; // Disable all external wakeup input pins  0..3
-  LLWU_PE2 = 0; // Disable all external wakeup input pins  4..7
-  LLWU_PE3 = 0; // Disable all external wakeup input pins  8..11
-  LLWU_PE4 = 0; // Disable all external wakeup input pins 12..15
-  LLWU_ME  = LLWU_ME_WUME5_MASK; //rtc alarm
+  LLWU_PE1 = 0;
+  LLWU_PE2 = 0;
+  LLWU_PE3 = 0;
+  LLWU_PE4 = 0;
+  LLWU_ME  = LLWU_ME_WUME5; //rtc alarm
 }
 
 /********************* go to deep sleep *********************/
