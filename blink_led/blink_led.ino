@@ -1,3 +1,8 @@
+/*
+ * Demonstrate to use a non-blocking function to blink the
+ * on-board LED.
+ */
+
 void blink(uint8_t pin, uint32_t count) {
   volatile uint32_t index;
 
