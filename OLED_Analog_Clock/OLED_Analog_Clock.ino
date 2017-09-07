@@ -30,6 +30,10 @@
 #include <TimeLib.h>
 #include <OneWire.h>
 
+#if !defined SSD1306_128_64
+  #error "You have to define SSD1306_128_64 in Adafruit_SSD1306.h"
+#endif
+
 #define OLED_DC     9
 #define OLED_CS     2
 #define OLED_RESET 14
