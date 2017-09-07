@@ -5,6 +5,37 @@
 #define OLED_CS     2
 #define OLED_RESET 14
 
+// weekday() returns integer: 1 = Sunday
+const char  *WeekdayName[] = {
+  "      "   , // 0
+  "Sunday"   , // 1
+  "Monday"   , // 2
+  "Tuesday"  , // 3
+  "Wednesday", // 4
+  "Thursday" , // 5
+  "Friday"   , // 6
+  "Saturday"   // 7
+};
+
+// month() returns integer: 1 = January
+const char  *MonthName[] = {
+  "   ",       // 0
+  "Jan",       // 1
+  "Feb",       // 2
+  "Mar",       // 3
+  "Apr",       // 4
+  "May",       // 5
+  "Jun",       // 6
+  "Jul",       // 7
+  "Aug",       // 8
+  "Sep",       // 9
+  "Oct",       // 10
+  "Nov",       // 11
+  "Dec"        // 12
+};
+
+char datetime[32];
+
 Adafruit_SSD1306 display(OLED_DC, OLED_RESET, OLED_CS);
 time_t           t;
 
@@ -63,7 +94,15 @@ int16_t  x1, x2, x3, y1, y2, y3;
   y3 = 32 - 15*cos(angle);
   display.drawLine(64, 32, x3, y3, WHITE);
   
-    
+  snprintf(datetime, 32, 
+           "%02d:%02d:%02d %02d-%s-%d %s",
+           hour(), minute(), second(),
+           day(), MonthName[month()],
+           year(), WeekdayName[weekday()]
+          );
+  display.setCursor(64,20);
+  display.print(datetime);
+
   display.display();
   delay(1000);
 }
