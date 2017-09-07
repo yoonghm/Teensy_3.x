@@ -1,3 +1,31 @@
+/*
+ * This example shows how to interface
+ *  - SSD1306 128x64 monochrome OLED
+ *  - DS18S20 1-wire digital temperature sensor
+ *
+ *  Connection
+ *
+ *  | SSD1306 | Teensy 3.6 | Description                   |
+ *  |---------|------------|-------------------------------|
+ *  |  DC     |     9      | Data/Command form/to OLED     |
+ *  |  RES    |    14      | Reset OLED                    |
+ *  |  D1     |    11      | SPI's MOSI pin                |
+ *  |  D2     |    13      | SPI's SCK                     |
+ *  |  VCC    |    Vin     | Power supply (5 V)            |
+ *  |  GND    |    GND     | Ground                        |
+ *
+ *  | DS18S20 | Teensy 3.6 | Description                   |
+ *  |---------|------------|-------------------------------|
+ *  |  GND    |    GND     | Ground                        |
+ *  |  DQ     |    10      | Data/Command from/to DS18S20  |
+ *  |  VDD    |    VIN     | Power supply (5 V)            |
+ *
+ *  Note:
+ *  a. Uncomment "#define SSD1306_128_64" and comment SSD1306_128_32
+ *     from Adafruit_SSD1306.h
+ *  b. Need a 4.7k ohm resistor between VDD and DQ
+ */
+
 #include <Adafruit_SSD1306.h>
 #include <TimeLib.h>
 #include <OneWire.h>
