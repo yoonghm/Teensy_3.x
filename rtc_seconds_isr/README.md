@@ -1,0 +1,1 @@
+This example demonstrates to use RTC second interrupt to blink the onbard LED in every second.
