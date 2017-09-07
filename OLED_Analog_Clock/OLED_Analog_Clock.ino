@@ -22,7 +22,7 @@
  *
  *  Note:
  *  a. Uncomment "#define SSD1306_128_64" and comment SSD1306_128_32
- *     from Adafruit_SSD1306.h
+ *     in Adafruit_SSD1306.h
  *  b. Need a 4.7k ohm resistor between VDD and DQ
  */
 
