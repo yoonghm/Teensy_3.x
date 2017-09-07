@@ -57,16 +57,16 @@ float    angle; // in radians
 int16_t  x1, x2, x3, y1, y2, y3;
 
   display.clearDisplay(); // clear internal display buffer
-  display.drawCircle(64, 32, 30, WHITE);
-  display.drawCircle(64, 32,  2, WHITE);
+  display.drawCircle(32, 32, 30, WHITE);
+  display.drawCircle(32, 32,  2, WHITE);
 
   // Draw ticks:
   // A small line at every 30 deg clockwise from vertical axis
   for (int z = 0; z < 360; z += 30) { // Clockwise angle from vertical axis
     angle = z / 57.29577951; // Convert degrees to radians;
-    x1 = 64 + 30*sin(angle);
+    x1 = 32 + 30*sin(angle);
     y1 = 32 - 30*cos(angle);
-    x2 = 64 + 28*sin(angle);
+    x2 = 32 + 28*sin(angle);
     y2 = 32 - 28*cos(angle);
     display.drawLine(x1, y1, x2, y2, WHITE);
   }
@@ -75,32 +75,38 @@ int16_t  x1, x2, x3, y1, y2, y3;
   // Draw second hand:
   // Every second occupies 6 deg
   angle = second(t)*6 / 57.29577951;
-  x3 = 64 + 28*sin(angle);
+  x3 = 32 + 28*sin(angle);
   y3 = 32 - 28*cos(angle);
-  display.drawLine(64, 32, x3, y3, WHITE);
+  display.drawLine(32, 32, x3, y3, WHITE);
 
   // Draw minute hand:
   // Every minute occupies 6 deg
   angle = minute(t)*6 / 57.29577951;
-  x3 = 64 + 20*sin(angle);
+  x3 = 32 + 20*sin(angle);
   y3 = 32 - 20*cos(angle);
-  display.drawLine(64, 32, x3, y3, WHITE);
+  display.drawLine(32, 32, x3, y3, WHITE);
 
   // Draw hour hand:
   // In 12 hours (or 720 min), hour hand moves 360 deg
   // I.e., in every min, it move 2 deg
   angle = (hourFormat12(t)*60 + minute(t)) / 2 / 57.29577951;
-  x3 = 64 + 15*sin(angle);
+  x3 = 32 + 15*sin(angle);
   y3 = 32 - 15*cos(angle);
-  display.drawLine(64, 32, x3, y3, WHITE);
-  
-  snprintf(datetime, 32, 
-           "%02d:%02d:%02d %02d-%s-%d %s",
-           hour(), minute(), second(),
-           day(), MonthName[month()],
-           year(), WeekdayName[weekday()]
-          );
-  display.setCursor(64,20);
+  display.drawLine(32, 32, x3, y3, WHITE);
+
+  // Print hh:mm:ss
+  snprintf(datetime, 32, "%02d:%02d:%02d", hour(), minute(), second());
+  display.setCursor(68,35);
+  display.print(datetime);
+
+  // Print weekday
+  snprintf(datetime, 32, "%s", WeekdayName[weekday()]);
+  display.setCursor(68,45);
+  display.print(datetime);
+
+  // Print dd-mm-yyyy
+  snprintf(datetime, 32, "%02d-%s-%d", day(), MonthName[month()], year());
+  display.setCursor(61,55);
   display.print(datetime);
 
   display.display();
