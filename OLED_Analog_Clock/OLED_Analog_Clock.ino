@@ -1,12 +1,21 @@
 #include <Adafruit_SSD1306.h>
+#include <TimeLib.h>
 
 #define OLED_DC     9
 #define OLED_CS     2
 #define OLED_RESET 14
 
 Adafruit_SSD1306 display(OLED_DC, OLED_RESET, OLED_CS);
+time_t           t;
+
+// Function to retrieve time in seconds in 1-1-1972, from internal RTC
+time_t getTeensy3Time() {
+  return Teensy3Clock.get();
+}
 
 void setup() {
+  setSyncProvider(getTeensy3Time);   // Tell TimeLib to use internal RTC
+
   display.begin(SSD1306_SWITCHCAPVCC); // Generate high voltage internally
   display.setTextColor(WHITE); // White text
 }
@@ -30,7 +39,9 @@ int16_t  x1, x2, x3, y1, y2, y3;
     y2 = 32 - 28*cos(angle);
     display.drawLine(x1, y1, x2, y2, WHITE);
   }
-
+  display.setCursor(0,0);
+  t = now();
+  display.print(t);
   display.display();
   delay(1000);
 }
