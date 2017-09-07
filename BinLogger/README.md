@@ -3,8 +3,9 @@ This example, for Teensy 3.5 & 3.6, is modified from DataLogger from https://git
 # Requirements
 
 * microSD card - formatted in FAT16 or FAT32, in the on-board microSD card holder
-* SdFat library - https://github.com/greiman/SdFat-beta/tree/master/SdFat, installed in your Arduino IDE software.
-    * Copy the directory ```SdFat``` onto ```<Arduino>\hardware\teensy\avr\libraries\```
+* SdFat library - https://github.com/greiman/SdFat-beta/tree/master/SdFat, installed in your Arduino IDE software or sketchbook directory
+    * Copy the directory ```SdFat``` onto ```<Arduino>\hardware\teensy\avr\libraries\```, or
+    * Copy the directory ```SdFat``` onto ```<sketchbook>\libraries\```
 
 Teensy 3.5 & 3.6 use SDIO peripheral to interface micorSD via the on-board microSD holder.
 
