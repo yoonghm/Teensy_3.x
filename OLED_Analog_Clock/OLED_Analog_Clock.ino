@@ -47,7 +47,14 @@ int16_t  x1, x2, x3, y1, y2, y3;
   x3 = 64 + 28*sin(angle);
   y3 = 32 - 28*cos(angle);
   display.drawLine(64, 32, x3, y3, WHITE);
-  
+
+  // Draw minute hand:
+  // Every minute occupies 6 deg
+  angle = minute(t)*6 / 57.29577951;
+  x3 = 64 + 20*sin(angle);
+  y3 = 32 - 20*cos(angle);
+  display.drawLine(64, 32, x3, y3, WHITE);
+    
   display.display();
   delay(1000);
 }
