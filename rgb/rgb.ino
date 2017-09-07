@@ -1,3 +1,7 @@
+/*
+ * Connect a 4-pin RGB LED to pins 3,4,5 and GND
+ */
+
 #include <math.h>
  
 #ifndef M_PI
@@ -5,8 +9,8 @@
 #endif
 
 const int redPin   =  3;
-const int greenPin  =  4;
-const int bluePin =  5;
+const int greenPin =  4;
+const int bluePin  =  5;
 
 float f = 0.0;
 
