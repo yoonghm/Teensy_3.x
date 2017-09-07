@@ -54,7 +54,7 @@ void llwuSetup(void)
 #define SMC_PMCTRL_STOPM_MASK   0x7u
 #define SCB_SCR_SLEEPDEEP_MASK  0x4u
 
-void goSleep(void) {
+void __attribute__((optimize("O0"))) goSleep(void) {
   //volatile unsigned int dummyread;
   /* Make sure clock monitor is off so we don't get spurious reset */
   // currently not set by anything I know, so the clock monitor is not set from reset
