@@ -43,7 +43,6 @@ time_t     t;
 OneWire    ds(10);  // Need a 4.7k resistor between pin 10 and VCC
 bool       present;
 byte       addr[8]; // 8-byte unique ID for DS18x20
-byte       type_s;
 
 // Function to retrieve time in seconds in 1-1-1972, from internal RTC
 time_t getTeensy3Time() {
@@ -58,61 +57,40 @@ void getTemperature() {
   ds.select(addr);
   ds.write(0xBE); // Read scratchpad
 
-  for (int i = 0; i < 9; i++) { // 9 bytes
+  for (int i = 0; i < 9; i++) {
     data[i] = ds.read();
-    Serial.print(data[i], HEX);
-    Serial.print(" ");
   }
-  Serial.print(OneWire::crc8(data, 8), HEX);
-  Serial.println();
-  
+
   raw = (data[1] << 8) | data[0];
-  Serial.println((float)raw);
-  if (type_s) {
+
+  if (addr[0] == 0x10) { // DS18S20
     raw = raw << 3; // 9 bit resolution default
     if (data[7] == 0x10) { // 12-bit resolution
       raw = (raw & 0xFFF0) + 12 - data[6];
     }
-    Serial.print("type_s = ");
-    Serial.println(raw);
   }
-  else {
+  else if ((addr[0] == 0x28) || // DS18B20
+           (addr[0] == 0x22)) { // DS1822
     byte cfg = (data[4] & 0x60);
     if (cfg == 0x00) raw = raw & ~7; // 9-bit resolution, 93.75 ms
     else if (cfg == 0x20) raw = raw & ~3; // 10-bit resolution, 187.75 ms
     else if (cfg == 0x40) raw = raw & ~1; // 11-bit resolution, 375 ms
     // default is 12-bit resolution, 750 ms conversion time
   }
-  snprintf(str, 12, "%0.1fC", (float)(raw) /16.0);
+  snprintf(str, 12, "%0.1fC", (float)(raw) / 16.0);
 }
 
 void setup() {
-  // Setup TimeLib with RTC
   setSyncProvider(getTeensy3Time);   // Tell TimeLib to use internal RTC
 
-  // Setup SSD1306 OLED
   display.begin(SSD1306_SWITCHCAPVCC); // Generate high voltage internally
   display.setTextColor(WHITE); // White text
 
-  // Setup temperature sensor
   if (ds.search(addr)) {
-    Serial.print("ROM =");
-    for (int i = 0; i < 8; i++) {
-      Serial.write(' ');
-      Serial.print(addr[i], HEX);
-    }
-    Serial.println();
-    if (OneWire::crc8(addr, 7) == addr[7]) {
-      Serial.println("Addr's CRC is valid");
+    if (OneWire::crc8(addr, 7) == addr[7]) { // Address is valid
       present = true;
     }
   }
-
-  if (addr[0] == 0x10)      type_s = 1; // DS18S20, i.e., old DS1820
-  else if (addr[0] == 0x28) type_s = 0; // DS18B20
-  else if (addr[0] == 0x22) type_s = 0; // DS1822
-  Serial.print("type_s = ");
-  Serial.println(type_s);
 }
 
 void loop() {
@@ -123,11 +101,14 @@ void loop() {
   display.clearDisplay(); // clear internal display buffer
 
   // Display temperature
-  display.setCursor(65, 2);
-  display.setTextSize(2);
-  getTemperature();
-  display.print(str);
-  
+  if (present) {
+    display.setCursor(65, 2);
+    display.setTextSize(2);
+    getTemperature();
+    display.print(str);
+  }
+
+  // Draw the clock face: 1 big and 1 small circle centered at (31,32)
   display.drawCircle(31, 32, 30, WHITE);
   display.drawCircle(31, 32,  2, WHITE);
 
@@ -142,10 +123,8 @@ void loop() {
     display.drawLine(x1, y1, x2, y2, WHITE);
   }
 
-  display.setTextSize(1);
-
   t = now();
-  
+
   // Draw second hand:
   // Every second occupies 6 deg
   angle = second(t)*6 / 57.29577951;
@@ -167,6 +146,8 @@ void loop() {
   x1 = 31 + 15*sin(angle);
   y1 = 32 - 15*cos(angle);
   display.drawLine(31, 32, x1, y1, WHITE);
+
+  display.setTextSize(1);
 
   // Print hh:mm:ss
   snprintf(str, 12, "%02d:%02d:%02d", hour(), minute(), second());
