@@ -1,8 +1,8 @@
 volatile int status = 0;
 
 void rtc_seconds_isr() {
-	digitalWrite(LED_BUILTIN, status);
-	status = !status;
+  digitalWrite(LED_BUILTIN, status);
+  status = !status;
 }
 
 void setup() {
