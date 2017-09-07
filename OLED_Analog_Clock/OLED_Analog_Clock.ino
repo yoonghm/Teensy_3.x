@@ -54,6 +54,15 @@ int16_t  x1, x2, x3, y1, y2, y3;
   x3 = 64 + 20*sin(angle);
   y3 = 32 - 20*cos(angle);
   display.drawLine(64, 32, x3, y3, WHITE);
+
+  // Draw hour hand:
+  // In 12 hours (or 720 min), hour hand moves 360 deg
+  // I.e., in every min, it move 2 deg
+  angle = (hourFormat12(t)*60 + minute(t)) / 2 / 57.29577951;
+  x3 = 64 + 15*sin(angle);
+  y3 = 32 - 15*cos(angle);
+  display.drawLine(64, 32, x3, y3, WHITE);
+  
     
   display.display();
   delay(1000);
