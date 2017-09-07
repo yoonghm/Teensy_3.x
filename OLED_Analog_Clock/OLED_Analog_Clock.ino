@@ -39,9 +39,15 @@ int16_t  x1, x2, x3, y1, y2, y3;
     y2 = 32 - 28*cos(angle);
     display.drawLine(x1, y1, x2, y2, WHITE);
   }
-  display.setCursor(0,0);
   t = now();
-  display.print(t);
+  
+  // Draw second hand:
+  // Every second occupies 6 deg
+  angle = second(t)*6 / 57.29577951;
+  x3 = 64 + 28*sin(angle);
+  y3 = 32 - 28*cos(angle);
+  display.drawLine(64, 32, x3, y3, WHITE);
+  
   display.display();
   delay(1000);
 }
