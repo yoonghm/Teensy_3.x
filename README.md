@@ -7,7 +7,7 @@
 
 MK66FX1M0VMD18:
 - NXP Kinetis K66 180 Mhz Cortex-M4F MCU
-- 1.2 MB Flash, 256 kB SRAM
+- 1.2 MB Total Flash, 1 MB Program Flash, 256 kB SRAM
 - 2 x USB, Ethernet
 - 144-MAPBGA
 
