@@ -3,11 +3,11 @@
  * Connect a jumper wire to 16 or A2 (PTB0/LLWU_P5)
  */
 
-#define    TRPIN   16;
+#define    TRPIN   16
 
 int capavg; // average capacitance value returned by touchRead()
 
-#define DELTA  0.1
+#define    DELTA  0.1
 
 void setup() {
   Serial.begin(19200);
