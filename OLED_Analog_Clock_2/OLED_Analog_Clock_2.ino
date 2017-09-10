@@ -70,11 +70,11 @@ const char *MonthName[] = {
 };
 
 char       str[12];
-time_t     t;
-time_t     dimt; // time to dim the display (60 seconds from last active)
+time_t     t;    // current time (in second)
+time_t     dimt; // time (in second) to dim the display
 
 OneWire    ds(10);  // Need a 4.7k resistor between pin 10 and VCC
-bool       present;
+bool       present; // DS18x20 is present
 byte       addr[8]; // 8-byte unique ID for DS18x20
 
 int        capavg;
@@ -138,7 +138,7 @@ void setup() {
   }
   capavg = (int) (lcap/n);
 
-  dimt = now() + 60; // dim the display after 60 seconds inactivities
+  dimt = now() + 20; // dim the display after 20s of inactivities
 }
 
 void loop() {
@@ -150,7 +150,7 @@ void loop() {
 
   int cap = touchRead(TRPIN);
   if ( (cap - capavg) > (int) (DELTA * capavg)) {
-    dimt = t + 60;
+    dimt = t + 20; // Extend the dim time as there is user's activity
     display.dim(false);
   }
 
@@ -159,6 +159,9 @@ void loop() {
     display.dim(true);
     display.clearDisplay();
     display.display();
+
+    ds.depower(); // De-power the DS18x20
+
     return;
   }
 
