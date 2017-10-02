@@ -25,7 +25,7 @@ MK64FX512VMD12:
 
 MK20DX256VLH7:
 - NXP Kinetis K20 72 Mhz Cortex-M4F MCU
-- 288 kB Flash, 64 kB SRAM, USB
+- 256 kB Flash, 64 kB SRAM, USB
 - 64-LQFP
 
 
