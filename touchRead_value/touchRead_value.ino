@@ -1,3 +1,7 @@
+/*
+ * Open Serial Monitor window to monitor serial port
+ * Capacitance value (pF) is very stable
+ */
 void setup()   {                
   Serial.begin(38400);
 }
