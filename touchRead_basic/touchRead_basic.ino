@@ -1,39 +1,30 @@
 /*
- * This example shows how to use touchRead() found in Teensy
- * Connect a jumper wire to 16 or A2 (PTB0/LLWU_P5)
+ *  When touching pin 16 (or via jumper wire), onboard LED (pin 13) will blink
  */
 
-#define    TRPIN   16
+int capavg = 0; // Running average capacitance
 
-int capavg; // average capacitance value returned by touchRead()
+const float sensitivity = 0.1;
+const int ledPin = 13;
+const int touchPin = 16;
 
-#define    DELTA  0.1
+void setup()   {                
+  pinMode(ledPin, OUTPUT); // onboard LED
 
-void setup() {
-  Serial.begin(19200);
-  pinMode(LED_BUILTIN, OUTPUT);
-
-  // Calibration: Get an average capacitance value
-  int n = 5; // Take 5 samples
+  // Self calibration: read 5 samples, obtain average
   long lcap = 0;
-  capavg = 0;
-  for (int i=0; i<n; i++) {
-    lcap += touchRead(TRPIN);
-  }
-  capavg = (int) (lcap/n);
+  for (int i=0; i<5; i++) 
+    lcap += touchRead(touchPin); // Accumulate capacitance from 5 samples
+  capavg = (int) (lcap/n); // Obtain average value
 }
 
-void loop() {
-  int cap = touchRead(TRPIN);
-/*
-  Serial.print(cap);
-  Serial.print("/");
-  Serial.println(capavg);
-*/
-  if ( (cap - capavg) > (int) (DELTA * capavg)) {
-    digitalWrite(LED_BUILTIN, 1); delay(200); digitalWrite(LED_BUILTIN, 0);
-  }
-  capavg = (int) (cap + capavg) / 2; // Moving average
+void loop()  {
+  int cap = touchRead(touchPin);
 
+  if ( (cap-capavg) > (int) (sensitivity*capavg)) {
+    digitalWrite(ledPin, 1); delay(200);
+    digitalWrite(ledPin, 0); delay(200);
+  }
+  capavg = (int) (cap+capavg)/2; // New moving average
   delay(200);
 }
