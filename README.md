@@ -1,7 +1,7 @@
 # Resources for Teensy
 
 - Download compatible Arduino IDE [here](https://www.arduino.cc/en/Main/Software)
-- Download Teensyduino for compatible Arduino IDE [here](https://www.pjrc.com/teensy/teensyduino.html)
+- Download Teensyduino for compatible Arduino IDE [here](https://www.pjrc.com/teensy/td_download.html)
 - Slides for Teensy 3.x [here](https://www.slideshare.net/yoonghm/teensy-up-and-running-20)
 
 # Tips and Examples for Teensy 3.x
